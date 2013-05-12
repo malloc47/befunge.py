@@ -77,19 +77,10 @@ def handle_literal(s,t):
 # functions above
 
 # grab functions from this module
-# __fnmembers__ = dict(inspect.getmembers(sys.modules[__name__], inspect.isfunction))
-
-# __fnmembers__ = dict([m for m in inspect.getmembers(sys.modules[__name__])
-#                       if getattr(m[1],'__module__','') == __name__
-#                       or (getattr(m[1],'func',None) and
-#                           getattr(m[1].func,'__module__','') == __name__
-#                       )])
-
 __fnmembers__ = dict([f for f in inspect.getmembers(sys.modules[__name__])
                       if getattr(f[1],'__module__','') == __name__])
 
 test = [m for m in inspect.getmembers(sys.modules[__name__])]
-
 
 def str_list_to_dict(lst):
     """
