@@ -1,13 +1,13 @@
 import unittest
-import befunge.state
-import befunge.semantic as s
+import befunge.state as state
+import befunge.evaluation as evaluation
 from befunge.board import BefungeBoard
 
 
 class TestState(unittest.TestCase):
 
     def setUp(self):
-        self.state = befunge.state.State(befunge.board.BefungeBoard())
+        self.state = state.State(BefungeBoard())
 
     def test_move_left(self):
         self.state.move()
@@ -109,111 +109,111 @@ class TestBoard(unittest.TestCase):
 class TestSemantic(unittest.TestCase):
 
     def setUp(self):
-        self.state = befunge.state.State(befunge.board.BefungeBoard())
+        self.state = state.State(BefungeBoard())
 
     def test_num(self):
-        s.num(self.state, '0')
+        evaluation.num(self.state, '0')
         self.assertEqual(self.state.peek(), 0)
-        s.num(self.state, '5')
+        evaluation.num(self.state, '5')
         self.assertEqual(self.state.peek(), 5)
-        s.num(self.state, '10')
+        evaluation.num(self.state, '10')
         self.assertEqual(self.state.peek(), 10)
-        s.num(self.state, '-2')  # not actually in spec
+        evaluation.num(self.state, '-2')  # not actually in spec
         self.assertEqual(self.state.peek(), -2)
 
     def test_add(self):
-        s.add(self.state, '+')
+        evaluation.add(self.state, '+')
         self.assertEqual(self.state.peek(), 0)
         self.state.push(1)
         self.state.push(1)
-        s.add(self.state, '+')
+        evaluation.add(self.state, '+')
         self.assertEqual(self.state.peek(), 2)
         self.state.push(1)
-        s.add(self.state, '+')
+        evaluation.add(self.state, '+')
         self.assertEqual(self.state.peek(), 3)
 
     def test_not(self):
-        s.lnot(self.state, '!')
+        evaluation.lnot(self.state, '!')
         self.assertEqual(self.state.peek(), 1)
-        s.lnot(self.state, '!')
+        evaluation.lnot(self.state, '!')
         self.assertEqual(self.state.peek(), 0)
         self.state.push(5)
-        s.lnot(self.state, '!')
+        evaluation.lnot(self.state, '!')
         self.assertEqual(self.state.peek(), 0)
         self.state.pop()
         self.state.pop()
-        s.lnot(self.state, '!')
+        evaluation.lnot(self.state, '!')
         self.assertEqual(self.state.peek(), 1)
 
     def test_mdir(self):
-        s.mdir(self.state, '^')
+        evaluation.mdir(self.state, '^')
         self.assertEqual(self.state.direction, '^')
 
     def test_rnd(self):
-        s.rnd(self.state, '?')
+        evaluation.rnd(self.state, '?')
         self.assertIn(self.state.direction, ['>', '<', 'v', '^'])
 
     def test_iflr(self):
-        s.iflr(self.state, '_')
+        evaluation.iflr(self.state, '_')
         self.assertIn(self.state.direction, ['>', '<'])
 
     def test_ifud(self):
-        s.ifud(self.state, '|')
+        evaluation.ifud(self.state, '|')
         self.assertIn(self.state.direction, ['v', '^'])
 
     def test_lit(self):
-        s.lit(self.state, '"')
+        evaluation.lit(self.state, '"')
         self.assertTrue(self.state.literal)
-        s.lit(self.state, '"')
+        evaluation.lit(self.state, '"')
         self.assertFalse(self.state.literal)
 
     def test_dup(self):
         self.state.push(4)
-        s.dup(self.state, ':')
+        evaluation.dup(self.state, ':')
         self.assertEqual(self.state.stack[-2:], [4, 4])
         self.state.push(7)
-        s.dup(self.state, ':')
+        evaluation.dup(self.state, ':')
         self.assertEqual(self.state.stack[-2:], [7, 7])
 
     def test_swp(self):
-        s.swp(self.state, '\\')
+        evaluation.swp(self.state, '\\')
         self.assertEqual(self.state.stack[-2:], [0, 0])
         self.state.push(4)
         self.state.push(7)
         self.assertEqual(self.state.stack[-2:], [4, 7])
-        s.swp(self.state, '\\')
+        evaluation.swp(self.state, '\\')
         self.assertEqual(self.state.stack[-2:], [7, 4])
 
     def test_popint(self):
-        self.assertEqual(s.popint(self.state, '.'), '0')
+        self.assertEqual(evaluation.popint(self.state, '.'), '0')
         self.state.push(27)
-        self.assertEqual(s.popint(self.state, '.'), '27')
+        self.assertEqual(evaluation.popint(self.state, '.'), '27')
         self.state.push(-92)
-        self.assertEqual(s.popint(self.state, '.'), '-92')
+        self.assertEqual(evaluation.popint(self.state, '.'), '-92')
 
     def test_popchr(self):
-        self.assertEqual(s.popchr(self.state, ', '), '\x00')
+        self.assertEqual(evaluation.popchr(self.state, ', '), '\x00')
         self.state.push(47)
-        self.assertEqual(s.popchr(self.state, ', '), '/')
+        self.assertEqual(evaluation.popchr(self.state, ', '), '/')
         self.state.push(94)
-        self.assertEqual(s.popchr(self.state, ', '), '^')
+        self.assertEqual(evaluation.popchr(self.state, ', '), '^')
 
     def test_skp(self):
-        s.skp(self.state, '#')
+        evaluation.skp(self.state, '#')
         self.assertEqual(self.state.pos, (0, 1))
 
     def test_put(self):
         self.state.push(76)
         self.state.push(3)
         self.state.push(2)
-        s.put(self.state, 'p')
+        evaluation.put(self.state, 'p')
         self.assertEqual(self.state.board.get((2, 3)), ord('L'))
 
     def test_get(self):
         self.state.board.put((3, 2), 'K')
         self.state.push(2)
         self.state.push(3)
-        s.get(self.state, 'g')
+        evaluation.get(self.state, 'g')
         self.assertEqual(self.state.peek(), ord('K'))
 
 if __name__ == '__main__':

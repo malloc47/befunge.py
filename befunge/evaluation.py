@@ -3,8 +3,12 @@ import operator as op
 from functools import partial
 import random
 import inspect
-from tokens import Tokens
+from syntax import Tokens
 
+# this file contains evaluations for relevant tokens; it follows the
+# convention that functions names that match with the token names
+# (regardless of case) are paired up using the metaprogramming below
+# the function definitions
 
 def partial_application(f, *args):
     """this wrapper insures that the __module__ property is set to make
@@ -13,14 +17,11 @@ def partial_application(f, *args):
     out.__module__ = __name__
     return out
 
-
 def num(s, t): s.push(int(t))
-
 
 def op_binary(f, s, t):
     a, b = s.pop(), s.pop()
     s.push(f(b, a))
-
 
 add = partial_application(op_binary, op.add)
 sub = partial_application(op_binary, op.sub)
@@ -103,6 +104,6 @@ def str_list_to_dict(lst):
 
 # associate token names with the (lowercased) function names in this
 # module if there's a match
-token_fn = str_list_to_dict([(Tokens[k], __fnmembers__[k.lower()])
-                             for k in Tokens.keys() if k.lower() in
-                             __fnmembers__])
+evaluations = str_list_to_dict([(Tokens[k], __fnmembers__[k.lower()])
+                                for k in Tokens.keys() if k.lower() in
+                                __fnmembers__])

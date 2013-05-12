@@ -1,4 +1,8 @@
 def get_size(filename):
+    """
+    helper function that reads in the file to determine the grid size
+    needed
+    """
     rows = 1         # there must be one row
     cols = 0
     i = 0
@@ -19,6 +23,10 @@ def get_size(filename):
 
 
 class BefungeBoard(object):
+    """
+    wraps a matrix and provides getters/setters that cast from chr to
+    int, as well as reading from flat files
+    """
     def __init__(self, filename=None):
         rows, cols = 0, 0
         # autocompute size

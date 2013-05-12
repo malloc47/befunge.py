@@ -5,15 +5,14 @@ import math
 
 def quine(filename):
     source = open(filename).read()
-    state = befunge.init_std_befunge_state(filename)
-    output = befunge.run(state, display=False)
+    output = befunge.run(filename=filename, display=False)
     return (source, output)
 
 
 def runner(filename, inpt=[]):
-    state = befunge.init_std_befunge_state(filename)
+    state = befunge.State(befunge.BefungeBoard(filename))
     state.user_input = inpt
-    return befunge.run(state, display=False).strip()
+    return befunge.run(state=state, display=False).strip()
 
 
 def fac_runner(filename, n, prefix=''):
