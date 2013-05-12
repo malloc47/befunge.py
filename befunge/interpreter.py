@@ -1,8 +1,8 @@
-from syntax import Tokens
-from evaluation import evaluations as actions
-from evaluation import handle_literal
-from state import State
-from board import BefungeBoard
+from befunge.syntax import Tokens
+from befunge.evaluation import evaluations as actions
+from befunge.evaluation import handle_literal
+from befunge.state import State
+from befunge.board import BefungeBoard
 
 
 def run(filename=None, state=None, wait=0, display=True):

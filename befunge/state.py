@@ -1,6 +1,6 @@
 import sys
-from syntax import Tokens, directions
-from board import BefungeBoard
+from befunge.syntax import Tokens, directions
+from befunge.board import BefungeBoard
 
 
 class State(object):
@@ -42,7 +42,7 @@ class State(object):
         try:
             return self.user_input.pop()
         except:
-            return sys.stdin.read(1) if one else raw_input()
+            return sys.stdin.read(1) if one else input()
 
     def output(self, s, display=True):
         """either spool up the output strings or push them to stdout"""

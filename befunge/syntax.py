@@ -1,4 +1,4 @@
-from enum import enum
+from befunge.enum import enum
 
 Tokens = enum(NUM='0123456789',
               ADD='+',

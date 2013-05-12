@@ -1,3 +1,3 @@
-from interpreter import run
-from state import State
-from board import BefungeBoard
+from befunge.interpreter import run
+from befunge.state import State
+from befunge.board import BefungeBoard

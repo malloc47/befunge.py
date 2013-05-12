@@ -4,7 +4,8 @@ import math
 
 
 def quine(filename):
-    source = open(filename).read()
+    with open(filename) as f:
+        source = f.read()
     output = befunge.run(filename=filename, display=False)
     return (source, output)
 

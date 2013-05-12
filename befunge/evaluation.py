@@ -1,9 +1,9 @@
 import sys
 import operator as op
-from functools import partial
+from functools import partial, reduce
 import random
 import inspect
-from syntax import Tokens
+from befunge.syntax import Tokens
 
 # this file contains evaluations for relevant tokens; it follows the
 # convention that functions names that match with the token names
