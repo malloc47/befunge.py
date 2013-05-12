@@ -91,19 +91,19 @@ class TestBoard(unittest.TestCase):
 
     def test_get(self):
         b = BefungeBoard('code/hello.bf')
-        self.assertEqual(b.get((0, 0)), '>')
-        self.assertEqual(b.get((0, 15)), 'v')
-        self.assertEqual(b.get((2, 1)), '4')
-        self.assertEqual(b.get((4, 5)), '@')
-        self.assertEqual(b.get((24, 79)), ' ')
-        self.assertEqual(b.get((500, 500)), ' ')
+        self.assertEqual(b.get((0, 0)), ord('>'))
+        self.assertEqual(b.get((0, 15)), ord('v'))
+        self.assertEqual(b.get((2, 1)), ord('4'))
+        self.assertEqual(b.get((4, 5)), ord('@'))
+        self.assertEqual(b.get((24, 79)), ord(' '))
+        self.assertEqual(b.get((500, 500)), ord(' '))
 
     def test_put(self):
         b = BefungeBoard('code/hello.bf')
         b.put((0, 0), '@')
-        self.assertEqual(b.get((0, 0)), '@')
+        self.assertEqual(b.get((0, 0)), ord('@'))
         b.put((500, 500), '@')
-        self.assertEqual(b.get((500, 500)), ' ')
+        self.assertEqual(b.get((500, 500)), ord(' '))
 
 
 class TestSemantic(unittest.TestCase):
@@ -207,7 +207,7 @@ class TestSemantic(unittest.TestCase):
         self.state.push(3)
         self.state.push(2)
         s.put(self.state, 'p')
-        self.assertEqual(self.state.board.get((2, 3)), 'L')
+        self.assertEqual(self.state.board.get((2, 3)), ord('L'))
 
     def test_get(self):
         self.state.board.put((3, 2), 'K')

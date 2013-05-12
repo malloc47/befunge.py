@@ -58,11 +58,14 @@ def skp(s, t): s.move()
 
 def put(s, t):
     i, j, v = s.pop(), s.pop(), s.pop()
-    s.board.put((i, j), chr(v))
+    if v in range(256):
+        s.board.put((i, j), chr(v))
+    else:
+        s.board.put((i, j), v)  # allow non-char storage
 
 def get(s, t):
     i, j = s.pop(), s.pop()
-    s.push(ord(s.board.get((i, j))))
+    s.push(s.board.get((i, j)))
 
 def numin(s, t): return s.push(int(s.inpt()))
 

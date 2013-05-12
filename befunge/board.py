@@ -25,7 +25,7 @@ class BefungeBoard(object):
         if filename:
             rows, cols = get_size(filename)
         rows, cols = max(rows, 25), max(cols, 80)
-        self.board = [[' ' for j in range(cols)] for i in range(rows)]
+        self.board = [[ord(' ') for j in range(cols)] for i in range(rows)]
         if filename:
             self.read(filename)
 
@@ -36,11 +36,18 @@ class BefungeBoard(object):
         try:
             return self.board[pos[0]][pos[1]]
         except:
-            return ' '
+            return ord(' ')
 
     def put(self, pos, v):
+        # auto-convert to numeric value if chr
+        if type(v) is str and len(v) == 1:
+            val = ord(v)
+        elif type(v) is int:
+            val = v
+        else:
+            raise TypeError
         try:
-            self.board[pos[0]][pos[1]] = v
+            self.board[pos[0]][pos[1]] = val
         except:
             pass
 
@@ -62,6 +69,6 @@ class BefungeBoard(object):
     def __repr__(self):
         """a pretty-print, to avoid messy console dumps"""
         return '\n'.join(
-            [''.join(self.board[i]).rstrip()
+            [''.join(map(chr, self.board[i])).rstrip()
              for i in range(len(self.board))]
         ).rstrip()

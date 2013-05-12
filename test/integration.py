@@ -19,6 +19,15 @@ def runner(filename, inpt=[]):
 def fac_runner(filename, n, prefix=''):
     return (runner(filename, [str(n)]), prefix + str(math.factorial(n)))
 
+def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
+
+def gcd_runner(filename, a, b):
+    return (runner(filename, [str(a), str(b)]),
+            str(gcd(a, b)))
 
 class TestIntegration(unittest.TestCase):
 
@@ -64,7 +73,11 @@ class TestIntegration(unittest.TestCase):
 
     def test_rand2(self):
         for i in range(10):     # run ten times
-            self.assertIn(int(runner('code/rand2.bf')), range(0, 32))
+            self.assertIn(int(runner('code/rand2.bf')), range(0, 33))
 
     def test_sieve(self):
         self.assertEqual(runner('code/sieve.bf'), '2357111317192329313741434753596167717379')
+
+    def test_euclid(self):
+        for a, b in zip(range(1, 20), reversed(range(1, 20))):
+            self.assertEqual(*gcd_runner('code/euclid.bf', a, b))

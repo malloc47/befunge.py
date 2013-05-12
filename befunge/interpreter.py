@@ -15,14 +15,18 @@ def run(state, wait=0, display=True):
     """
     while True:
         # import pdb; pdb.set_trace()
-        token = state.read()
+        token = chr(state.read())
 
         if token == Tokens.END and not state.literal:
             break
 
-        output = (actions[token](state, token)
-                  if not state.literal
-                  else handle_literal(state, token))
+        try:
+            output = (actions[token](state, token)
+                      if not state.literal
+                      else handle_literal(state, token))
+        except KeyError:        # ignore unsupported tokens
+            output = ''
+
         state.output(output, display)
 
         state.move()
