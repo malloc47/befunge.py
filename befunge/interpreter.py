@@ -1,10 +1,11 @@
+import sys
 from tokens import Tokens
 from semantic import token_fn as actions
 from semantic import handle_literal
 
 def show_output(result):
     if result:
-        print(str(result)+' ') # looks better with spaces
+        sys.stdout.write(str(result))
 
 def run(state,wait=0):
     """
