@@ -1,7 +1,7 @@
 def get_size(filename):
     rows = 0
     cols = 0
-    i=0
+    i=1        # there must be one row
     j=0
     with open(filename) as f:
         while True:
@@ -12,10 +12,10 @@ def get_size(filename):
                 j = 0
                 i += 1
             else:
-                cols = max(j,cols)
                 j += 1
-        rows = max(i+1,rows)
-    return (rows,cols+1)
+                cols = max(j,cols)
+        rows = max(i,rows)
+    return (rows,cols)
 
 class BefungeBoard(object):
     def __init__(self,filename=None):
