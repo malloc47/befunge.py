@@ -1,7 +1,7 @@
 def get_size(filename):
-    rows = 0
+    rows = 1         # there must be one row
     cols = 0
-    i=1        # there must be one row
+    i=0
     j=0
     with open(filename) as f:
         while True:
@@ -21,9 +21,8 @@ class BefungeBoard(object):
     def __init__(self,filename=None):
         # autocompute size
         if filename:
-            rows,cols = get_size(filename)
-        else:
-            rows,cols = 25,80
+            rows, cols = get_size(filename)
+        rows, cols = max(rows,25), max(cols,80)
         self.board = [[' ' for j in range(cols)] for i in range(rows)]
         if filename:
             self.read(filename)
