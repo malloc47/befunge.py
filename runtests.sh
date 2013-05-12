@@ -1,2 +1,2 @@
 #!/bin/sh
-python -m unittest unit
+python -m unittest test.unit
