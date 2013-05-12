@@ -32,10 +32,16 @@ class BefungeBoard(object):
         return (len(self.board),len(self.board[0]))
 
     def get(self,pos):
-        return self.board[pos[0]][pos[1]]
+        try:
+            return self.board[pos[0]][pos[1]]
+        except:
+            return ' '
 
     def put(self,pos,v):
-        self.board[pos[0]][pos[1]] = v
+        try:
+            self.board[pos[0]][pos[1]] = v
+        except:
+            pass
 
     def read(self,filename):
         i = 0
