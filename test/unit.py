@@ -4,7 +4,6 @@ import unittest
 import befunge.state
 import befunge.semantic as s
 from befunge.board import BefungeBoard
-import random
 
 class TestState(unittest.TestCase):
 

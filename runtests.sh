@@ -1,2 +1,3 @@
 #!/bin/sh
-python -m unittest test.unit
+python -m unittest -v test.unit
+python -m unittest -v test.integration
