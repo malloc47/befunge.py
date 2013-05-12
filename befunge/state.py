@@ -26,3 +26,7 @@ class State(object):
     def peek(self): return self.stack[-1] if len(self.stack) > 0 else 0
 
     def read(self): return self.board.get(self.pos)
+
+    def __repr__(self):
+        return ('<pos: '+str(self.pos)+', direction: '
+                +str(self.direction)+', literal: '+str(self.literal))
