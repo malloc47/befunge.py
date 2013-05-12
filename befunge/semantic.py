@@ -5,18 +5,25 @@ import random
 import inspect
 from tokens import Tokens
 
+def partial_application(f,*args):
+    """this wrapper insures that the __module__ property is set to make
+    some metaprogramming work out below """
+    out = partial(f,*args)
+    out.__module__ = __name__
+    return out
+
 def num(s,t): s.push(int(t))
 
 def op_binary(f,s,t):
     a, b = s.pop(), s.pop()
     s.push(f(b,a))
 
-add = partial(op_binary, op.add)
-sub = partial(op_binary, op.sub)
-mul = partial(op_binary, op.mul)
-div = partial(op_binary, op.floordiv) # ignore the "ask the user" part
-mod = partial(op_binary, op.mod)
-gt  = partial(op_binary, op.gt)
+add = partial_application(op_binary, op.add)
+sub = partial_application(op_binary, op.sub)
+mul = partial_application(op_binary, op.mul)
+div = partial_application(op_binary, op.floordiv) # ignore the "ask the user" part
+mod = partial_application(op_binary, op.mod)
+gt  = partial_application(op_binary, op.gt)
 
 def lnot(s,t): s.push(1 if s.pop()==0 else 0)
 
@@ -71,11 +78,15 @@ def handle_literal(s,t):
 
 # grab functions from this module
 # __fnmembers__ = dict(inspect.getmembers(sys.modules[__name__], inspect.isfunction))
-__fnmembers__ = dict([m for m in inspect.getmembers(sys.modules[__name__]) 
-                      if getattr(m[1],'__module__','').endswith('semantic') 
-                      or (getattr(m[1],'func',None) 
-                          and getattr(m[1].func,'__module__','').endswith('semantic')
-                      )])
+
+# __fnmembers__ = dict([m for m in inspect.getmembers(sys.modules[__name__])
+#                       if getattr(m[1],'__module__','') == __name__
+#                       or (getattr(m[1],'func',None) and
+#                           getattr(m[1].func,'__module__','') == __name__
+#                       )])
+
+__fnmembers__ = dict([f for f in inspect.getmembers(sys.modules[__name__])
+                      if getattr(f[1],'__module__','') == __name__])
 
 test = [m for m in inspect.getmembers(sys.modules[__name__])]
 
