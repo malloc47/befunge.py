@@ -1,3 +1,4 @@
+import sys
 from tokens import Tokens, directions
 
 class State(object):
@@ -7,6 +8,7 @@ class State(object):
         self.literal = False
         self.board = board
         self.stack = []
+        self.user_input = []
 
     def move(self):
         def wrap(pos,size):
@@ -26,6 +28,12 @@ class State(object):
     def peek(self): return self.stack[-1] if len(self.stack) > 0 else 0
 
     def read(self): return self.board.get(self.pos)
+
+    def inpt(self,one=False):
+        try:
+            return self.user_input.pop()
+        except:
+            return sys.stdin.read(1) if one else raw_input()
 
     def __repr__(self):
         return ('<pos: '+str(self.pos)+', direction: '
