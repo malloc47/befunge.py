@@ -57,6 +57,11 @@ minimum for all programs run.  Like the C reference implementation
 (which can be toggled), `befunge.py` will treat all non-instruction
 symbols as noops, not just the space character.
 
+Though not extensively compared, this implementation shares some
+aspects in common with [befungee][4] and the [online JavaScript][5]
+befunge interpreter.  These programs appear to make similar tradeoffs
+relative to the C reference implementation, and fail on similar programs.
+
 ## Usage
 
 Any befunge code can be run from the command line with
@@ -130,3 +135,5 @@ Jarrell Waggoner
 [1]: https://github.com/catseye/Befunge-93/blob/master/doc/Befunge-93.markdown
 [2]: https://github.com/programble/befungee/tree/master/examples
 [3]: https://github.com/catseye/Befunge-93/tree/master/eg
+[4]: https://github.com/programble/befungee
+[5]: http://www.quirkster.com/iano/js/befunge.html
