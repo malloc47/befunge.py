@@ -22,7 +22,7 @@ class State(object):
                        self.board.size())
 
     def push(self,n): self.stack.append(n)
-    def pop(self): return self.stack.pop()
+    def pop(self): return self.stack.pop() if len(self.stack) > 0 else 0
     def peek(self): return self.stack[-1] if len(self.stack) > 0 else 0
 
     def read(self): return self.board.get(self.pos)
