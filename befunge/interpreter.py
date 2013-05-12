@@ -3,12 +3,7 @@ from tokens import Tokens
 from semantic import token_fn as actions
 from semantic import handle_literal
 
-def show_output(result):
-    if result:
-        sys.stdout.write(str(result))
-        sys.stdout.flush()
-
-def run(state,wait=0):
+def run(state,wait=0,display=True):
     """
     befunge interpreter driver that simply follows:
 
@@ -19,6 +14,7 @@ def run(state,wait=0):
     5) stop if @ is reached
     """
     while True:
+        # import pdb; pdb.set_trace()
         token = state.read()
 
         if token == Tokens.END and not state.literal:
@@ -27,14 +23,17 @@ def run(state,wait=0):
         output = (actions[token](state,token)
                   if not state.literal
                   else handle_literal(state,token))
-        show_output(output)
+        state.output(output,display)
 
         state.move()
+
+        # print(str(token)+' : ' +str(state.stack))
 
         # allow us to slow down the simulation
         if wait:
             import time
             time.sleep(wait)
+    return state.output_spool
 
 def init_std_befunge_state(filename):
     from state import State

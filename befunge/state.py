@@ -9,6 +9,7 @@ class State(object):
         self.board = board
         self.stack = []
         self.user_input = []
+        self.output_spool = ''
 
     def move(self):
         def wrap(pos,size):
@@ -34,6 +35,14 @@ class State(object):
             return self.user_input.pop()
         except:
             return sys.stdin.read(1) if one else raw_input()
+
+    def output(self,s,display=True):
+        if not s: return
+        if display:
+            sys.stdout.write(str(s))
+            sys.stdout.flush()
+        else:
+            self.output_spool += s
 
     def __repr__(self):
         return ('<pos: '+str(self.pos)+', direction: '
