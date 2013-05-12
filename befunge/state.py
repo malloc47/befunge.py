@@ -10,16 +10,16 @@ class State(object):
 
     def move(self):
         def wrap(pos,size):
-            return [ (i if i<j else j-i) for i,j in zip(pos,size) ]
+            return pos if pos<size and pos >=0 else (pos-size)%size
         # move pointer and then wrap the coordinates if needed
-        self.pos = wrap(
-            tuple(
-                map(
-                    sum,
-                    zip(
-                        self.pos,
-                        directions[self.direction]))),
-            self.board.size())
+        self.pos = map(wrap,
+                       tuple(
+                           map(
+                               sum,
+                               zip(
+                                   self.pos,
+                                   directions[self.direction]))),
+                       self.board.size())
 
     def push(self,n): self.stack.append(n)
     def pop(self): return self.stack.pop()
