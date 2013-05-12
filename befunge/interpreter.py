@@ -6,6 +6,7 @@ from semantic import handle_literal
 def show_output(result):
     if result:
         sys.stdout.write(str(result))
+        sys.stdout.flush()
 
 def run(state,wait=0):
     """
