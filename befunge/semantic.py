@@ -80,8 +80,6 @@ def handle_literal(s,t):
 __fnmembers__ = dict([f for f in inspect.getmembers(sys.modules[__name__])
                       if getattr(f[1],'__module__','') == __name__])
 
-test = [m for m in inspect.getmembers(sys.modules[__name__])]
-
 def str_list_to_dict(lst):
     """
     We have some tokens that are associated with more than one

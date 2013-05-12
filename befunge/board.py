@@ -19,6 +19,7 @@ def get_size(filename):
 
 class BefungeBoard(object):
     def __init__(self,filename=None):
+        rows,cols = 0,0
         # autocompute size
         if filename:
             rows, cols = get_size(filename)
