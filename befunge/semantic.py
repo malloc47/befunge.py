@@ -60,9 +60,9 @@ def get(s,t):
     i, j = s.pop(), s.pop()
     s.push(ord(s.board.get((i,j))))
 
-def numin(s,t): return 47       # todo: get number as input
+def numin(s,t): return s.push(int(raw_input('num: ')))
 
-def chrin(s,t): return 'j'      # todo: get char as input
+def chrin(s,t): return s.push(ord(raw_input('chr: ')[0]))
 
 def noop(s,t): return
 
