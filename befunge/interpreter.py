@@ -1,4 +1,3 @@
-import sys
 from tokens import Tokens
 from semantic import token_fn as actions
 from semantic import handle_literal

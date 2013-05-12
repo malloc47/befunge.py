@@ -1,4 +1,3 @@
-import types
 from enum import enum
 
 Tokens = enum(NUM='0123456789',
