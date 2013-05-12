@@ -21,8 +21,23 @@ def get_size(filename):
         rows = max(i, rows)
     return (rows, cols)
 
+# could use pythons abc library for this for stronger contract
+class Board(object):
+    """common interface for all befunge boards"""
 
-class BefungeBoard(object):
+    def __init__(self, filename=None):
+        raise NotImplementedError()
+
+    def size(self):
+        raise NotImplementedError()
+
+    def get(self, pos):
+        raise NotImplementedError()
+
+    def put(self, pos, v):
+        raise NotImplementedError()
+
+class BefungeBoard(Board):
     """
     wraps a matrix and provides getters/setters that cast from chr to
     int, as well as reading from flat files
