@@ -21,7 +21,7 @@ def run(state,wait=0):
     while True:
         token = state.read()
 
-        if token == Tokens.END:
+        if token == Tokens.END and not state.literal:
             break
 
         output = (actions[token](state,token)
