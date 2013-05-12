@@ -1,5 +1,5 @@
 import os,sys
-sys.path.insert(0,'../')
+# sys.path.insert(0,'../')
 import unittest
 import befunge.state
 import befunge.semantic as s
@@ -89,10 +89,10 @@ class TestBoard(unittest.TestCase):
     def test_size(self):
         self.assertEqual(BefungeBoard().size(),(25,80)) # befunge size
         # test if board sizes up appropriately when given larger input
-        self.assertEqual(BefungeBoard('../code/valix.bf').size(),(25,98))
+        self.assertEqual(BefungeBoard('code/valix.bf').size(),(25,98))
 
     def test_get(self):
-        b = BefungeBoard('../code/hello.bf')
+        b = BefungeBoard('code/hello.bf')
         self.assertEqual(b.get((0,0)),'>')
         self.assertEqual(b.get((0,15)),'v')
         self.assertEqual(b.get((2,1)),'4')
@@ -101,7 +101,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(b.get((500,500)),' ')
 
     def test_put(self):
-        b = BefungeBoard('../code/hello.bf')
+        b = BefungeBoard('code/hello.bf')
         b.put((0,0),'@')
         self.assertEqual(b.get((0,0)),'@')
         b.put((500,500),'@')
