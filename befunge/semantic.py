@@ -46,9 +46,9 @@ def swp(s,t):
 
 def pop(s,t): s.pop()
 
-def popint(s,t): return s.pop()
+def popint(s,t): return str(s.pop())
 
-def popchr(s,t): return chr(s.pop())
+def popchr(s,t): return str(chr(s.pop()))
 
 def skp(s,t): s.move()
 
