@@ -9,13 +9,13 @@ def get_size(filename):
             if not c:
                 break
             if c == '\n':
-                cols = max(j,cols)
                 j = 0
                 i += 1
             else:
+                cols = max(j,cols)
                 j += 1
         rows = max(i+1,rows)
-    return (rows,cols)
+    return (rows,cols+1)
 
 class BefungeBoard(object):
     def __init__(self,filename=None):
