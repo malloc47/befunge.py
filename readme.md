@@ -40,12 +40,12 @@ Python (yes, autopromoting and possibly negative) `int` types.
 Befunge programs that rely on C-style char/int behavior will probably
 not work with `befunge.py`.
 
-Different from the reference implementation, simply fails on division
-by zero instead of asking the user.  Since Python has a cleaner
-separation between `chr` and `int`, this implementation uses an
-integer grid instead of a char grid, though there are still limits as
-to the type of data that may be placed in the grid compared with the C
-reference implementation.
+Different from the reference implementation, `befunge.py` simply fails
+on division by zero instead of asking the user.  Since Python has a
+cleaner separation between `chr` and `int`, this implementation uses
+an integer grid instead of a char grid, though there are still limits
+as to the type of data that may be placed in the grid compared with
+the C reference implementation.
 
 Finally, some Befunge programs are not fully conformant with the spec,
 and rely on non-standard grid sizes, non-terminating behavior when
