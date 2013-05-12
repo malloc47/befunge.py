@@ -47,5 +47,5 @@ class State(object):
             self.output_spool += s
 
     def __repr__(self):
-        return ('<pos: '+str(self.pos) + ', direction: '
+        return ('<pos: ' + str(self.pos) + ', direction: '
                 + str(self.direction) + ', literal: ' + str(self.literal))

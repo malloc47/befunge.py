@@ -17,7 +17,7 @@ def runner(filename, inpt=[]):
 
 
 def fac_runner(filename, n, prefix=''):
-    return (runner(filename, [str(n)]), prefix+str(math.factorial(n)))
+    return (runner(filename, [str(n)]), prefix + str(math.factorial(n)))
 
 
 class TestIntegration(unittest.TestCase):

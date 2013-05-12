@@ -25,19 +25,19 @@ def op_binary(f, s, t):
 add = partial_application(op_binary, op.add)
 sub = partial_application(op_binary, op.sub)
 mul = partial_application(op_binary, op.mul)
-div = partial_application(op_binary, op.floordiv) # ignore the "ask the user" part
+div = partial_application(op_binary, op.floordiv)  # ignore the "ask the user" part
 mod = partial_application(op_binary, op.mod)
 gt = partial_application(op_binary, op.gt)
 
-def lnot(s, t): s.push(1 if s.pop()==0 else 0)
+def lnot(s, t): s.push(1 if s.pop() == 0 else 0)
 
 def mdir(s, t): s.direction = t
 
 def rnd(s, t): s.direction = random.choice(Tokens.MDIR)
 
-def iflr(s, t): s.direction = Tokens.MDIR[0 if s.pop()==0 else 1]
+def iflr(s, t): s.direction = Tokens.MDIR[0 if s.pop() == 0 else 1]
 
-def ifud(s, t): s.direction = Tokens.MDIR[(0 if s.pop()==0 else 1)+2]
+def ifud(s, t): s.direction = Tokens.MDIR[(0 if s.pop() == 0 else 1) + 2]
 
 def lit(s, t): s.literal = not s.literal
 
@@ -100,6 +100,6 @@ def str_list_to_dict(lst):
 
 # associate token names with the (lowercased) function names in this
 # module if there's a match
-token_fn = str_list_to_dict([(Tokens[k],  __fnmembers__[k.lower()])
+token_fn = str_list_to_dict([(Tokens[k], __fnmembers__[k.lower()])
                              for k in Tokens.keys() if k.lower() in
                              __fnmembers__])
