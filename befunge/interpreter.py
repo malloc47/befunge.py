@@ -2,7 +2,8 @@ from tokens import Tokens
 from semantic import token_fn as actions
 from semantic import handle_literal
 
-def run(state,wait=0,display=True):
+
+def run(state, wait=0, display=True):
     """
     befunge interpreter driver that simply follows:
 
@@ -19,10 +20,10 @@ def run(state,wait=0,display=True):
         if token == Tokens.END and not state.literal:
             break
 
-        output = (actions[token](state,token)
+        output = (actions[token](state, token)
                   if not state.literal
-                  else handle_literal(state,token))
-        state.output(output,display)
+                  else handle_literal(state, token))
+        state.output(output, display)
 
         state.move()
 
@@ -34,7 +35,8 @@ def run(state,wait=0,display=True):
             time.sleep(wait)
     return state.output_spool
 
+
 def init_std_befunge_state(filename):
     from state import State
     from board import BefungeBoard
-    return State(BefungeBoard(filename=filename)) # defaults to 25x80
+    return State(BefungeBoard(filename=filename))  # defaults to 25x80
