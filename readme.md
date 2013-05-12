@@ -12,7 +12,8 @@ concerned.
 ## Features
 
 - Python 2/3 compatible.  Tested on Python 2.7.3, 2.7.4, 3.2.3, and
-  3.3.1.
+  3.3.1, as well as 2.6.6 (though unit tests do not run on this
+  version).
   
 - Unit and integration test suite, which can be run with
   `./runtests.sh`.
@@ -34,7 +35,7 @@ concerned.
 ## Differences From Befunge 93 C Reference Implementation
 
 There are several tradeoffs made to keep this implementation simple
-relative to the C reference implementation of Befunge 93.
+relative to the [C reference implementation][6] of Befunge 93.
 Specifically, the current board backend stores everything as plain
 Python (yes, autopromoting and possibly negative) `int` types.
 Befunge programs that rely on C-style char/int behavior will probably
@@ -59,12 +60,13 @@ symbols as noops, not just the space character.
 
 Though not extensively compared, this implementation shares some
 aspects in common with [befungee][4] and the [online JavaScript][5]
-befunge interpreter.  These programs appear to make similar tradeoffs
-relative to the C reference implementation, and fail on similar programs.
+befunge interpreter.  These implementations appear to make similar
+tradeoffs relative to the C reference implementation, and fail on
+similar programs.
 
 ## Usage
 
-Any befunge code can be run from the command line with
+Befunge code can be run from the command line with
 
     ./befunge.py code/hello.bf
     
@@ -79,12 +81,18 @@ time (0.01 to 0.001) are probably best for many programs.
 To programmatically use the interpreter, simply `import befunge` and
 use the `run` command, which can be called in a number of ways:
 
-    import befunge
-    befunge.run(filename='code/hello.bf')
-    str_output = befunge.run(filename='code/hello.bf',display=False)
-    print(str_output)
-    state = befunge.State(befunge.BefungeBoard('code/hello.bf'))
-    befunge.run(state=state)
+```python
+import befunge
+# standalone
+befunge.run(filename='code/hello.bf')
+# to string instead of stdout
+str_output = befunge.run(filename='code/hello.bf',display=False)
+print(str_output)
+# with a modifiable state variable
+state = befunge.State(befunge.BefungeBoard('code/hello.bf'))
+state.pos = (3,5)
+befunge.run(state=state)
+```
     
 Examine both `befunge.py` and `tests/{unit,integration}.py` for more
 examples of usage.
@@ -137,3 +145,4 @@ Jarrell Waggoner
 [3]: https://github.com/catseye/Befunge-93/tree/master/eg
 [4]: https://github.com/programble/befungee
 [5]: http://www.quirkster.com/iano/js/befunge.html
+[6]: https://github.com/catseye/Befunge-93
