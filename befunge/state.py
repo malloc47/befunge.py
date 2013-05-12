@@ -1,7 +1,5 @@
 from tokens import Tokens, directions
 
-
-
 class State(object):
     def __init__(self,board):
         self.pos = (0,0)
@@ -20,11 +18,11 @@ class State(object):
                     sum,
                     zip(
                         self.pos,
-                        directions[self.direction])))
+                        directions[self.direction]))),
             self.board.size())
 
-    def push(self,n): self.stack.append(,n)
+    def push(self,n): self.stack.append(n)
     def pop(self): return self.stack.pop()
     def peek(self): return self.stack[-1] if len(self.stack) > 0 else 0
 
-    def read(self): return self.board.get(pos)
+    def read(self): return self.board.get(self.pos)

@@ -7,11 +7,11 @@ class BefungeBoard(object):
     def size(self):
         return (len(self.board),len(self.board[0]))
 
-    def get(self,i,j):
-        return self.board[i][j]
+    def get(self,pos):
+        return self.board[pos[0]][pos[1]]
 
-    def put(self,i,j,v):
-        self.board[i][j] = v
+    def put(self,pos,v):
+        self.board[pos[0]][pos[1]] = v
 
     def read(self,filename):
         i = 0
@@ -25,7 +25,7 @@ class BefungeBoard(object):
                     j = 0
                     i += 1
                 else:
-                    self.put(i,j,c)
+                    self.put((i,j),c)
                     j += 1
 
     def __repr__(self):

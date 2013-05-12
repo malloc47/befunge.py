@@ -4,7 +4,7 @@ from semantic import handle_literal
 
 def show_output(result):
     if result:
-        print(str(output)+' ') # looks better with spaces
+        print(str(result)+' ') # looks better with spaces
 
 def run(state,wait=0):
     """
@@ -19,9 +19,12 @@ def run(state,wait=0):
     while True:
         token = state.read()
 
-        output = (actions[token](stack,token)
+        if token == Tokens.END:
+            break
+
+        output = (actions[token](state,token)
                   if not state.literal
-                  else handle_literal(stack,token))
+                  else handle_literal(state,token))
         show_output(output)
 
         state.move()
@@ -31,10 +34,7 @@ def run(state,wait=0):
             import time
             time.sleep(wait)
 
-        if token == Tokens.END:
-            break
-
 def init_std_befunge_state(filename):
     from state import State
     from board import BefungeBoard
-    return State(BefungeBoard(filename)) # defaults to 25x80
+    return State(BefungeBoard(filename=filename)) # defaults to 25x80
