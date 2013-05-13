@@ -37,8 +37,8 @@ class State(object):
     def read(self): return self.board.get(self.pos)
 
     def inpt(self, one=False):
-        # try to read from user_input first, in cause we're being
-        # automated instead of interactively run
+        # try to read from user_input first, so that the interpreter
+        # can be automated
         try:
             return self.user_input.pop()
         except:
