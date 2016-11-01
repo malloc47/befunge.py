@@ -4,10 +4,9 @@ Basic befunge interpreter written in Python
 ## Description
 
 This interpreter implements (to a reasonable degree of conformance)
-the [Befunge 93 spec][1].  The aim was to write in an fully-formed
+the [Befunge 93 spec][1].  The aim was to write in a fully-formed
 engineering style rather than code golf, though liberties were taken
-with using a functional style where immutable datastructures were
-concerned.
+with using a functional style in places.
 
 ## Features
 
